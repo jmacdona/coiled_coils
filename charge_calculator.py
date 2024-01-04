@@ -1,7 +1,7 @@
 from __future__ import division
 from Bio.Data import IUPACData
-import numpy
-from numpy import *
+import numpy as np
+#from numpy import *
 import argparse
 
 #Karan
@@ -87,11 +87,11 @@ class Charge_Calculator(object):
 
     def charge_curve(self, name):
 
-        pH_x = numpy.arange(1,14,0.1)
+        pH_x = np.arange(1,14,0.1)
 
         charge_y = self.charge_values(pH_x)
 
-        savetxt(str(name)+'.dat', numpy.column_stack((pH_x, charge_y)), fmt='%f')
+        np.savetxt(str(name)+'.dat', np.column_stack((pH_x, charge_y)), fmt='%f')
 
 
 def main():
