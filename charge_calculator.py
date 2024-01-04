@@ -101,6 +101,7 @@ def main():
     args = parser.parse_args()
 
     protein_sequence = args.sequence
+    protein_sequence = protein_sequence.upper()
     output_file = args.output
 
     # Ensure the sequence only contains valid amino acids
