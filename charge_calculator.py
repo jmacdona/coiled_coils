@@ -91,7 +91,7 @@ class Charge_Calculator(object):
 
         charge_y = self.charge_values(pH_x)
 
-        np.savetxt(str(name)+'.dat', np.column_stack((pH_x, charge_y)), fmt='%f')
+        np.savetxt(str(name), np.column_stack((pH_x, charge_y)), fmt='%f')
 
 
 def main():
@@ -111,7 +111,7 @@ def main():
     # Create an instance of Charge_Calculator and calculate the charge curve
     charge_calculator = Charge_Calculator(protein_sequence)
     charge_calculator.charge_curve(output_file)
-    print(f"Charge curve data saved to {output_file}.dat")
+    print(f"Charge curve data saved to {output_file}")
 
 if __name__ == "__main__":
     main()
