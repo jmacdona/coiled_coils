@@ -2,6 +2,7 @@ from __future__ import division
 from Bio.Data import IUPACData
 import numpy
 from numpy import *
+import argparse
 
 #Karan
 
@@ -91,3 +92,26 @@ class Charge_Calculator(object):
         charge_y = self.charge_values(pH_x)
 
         savetxt(str(name)+'.dat', numpy.column_stack((pH_x, charge_y)), fmt='%f')
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Calculate the charge curve of a protein sequence.')
+    parser.add_argument('sequence', type=str, help='Protein sequence to calculate the charge curve for')
+    parser.add_argument('-o', '--output', type=str, default='charge_curve', help='Output file name without extension')
+    args = parser.parse_args()
+
+    protein_sequence = args.sequence
+    output_file = args.output
+
+    # Ensure the sequence only contains valid amino acids
+    valid_aas = set(IUPACData.protein_letters)
+    if not set(protein_sequence).issubset(valid_aas):
+        raise ValueError("Invalid protein sequence: contains non-standard amino acids.")
+
+    # Create an instance of Charge_Calculator and calculate the charge curve
+    charge_calculator = Charge_Calculator(protein_sequence)
+    charge_calculator.charge_curve(output_file)
+    print(f"Charge curve data saved to {output_file}.dat")
+
+if __name__ == "__main__":
+    main()
